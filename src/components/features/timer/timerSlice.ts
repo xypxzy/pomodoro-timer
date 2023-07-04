@@ -27,5 +27,5 @@ export const TimerSlice = createSlice({
     },
 })
 
-export const { setMinute, decrementSeconds, resetSeconds} = TimerSlice.actions
+export const { setMinute, decrementSeconds} = TimerSlice.actions
 export const timerReducers = TimerSlice.reducer
