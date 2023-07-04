@@ -1,0 +1,22 @@
+.light {
+    .focus {
+      --bg-color: #FFF2F2;
+      --primary-color: rgba(255, 76, 76, 0.71);
+      --secondary-color: #471515;
+      --btn-bg: rgba(255, 76, 76, 0.15);
+    }
+
+    .short {
+      --bg-color: #F2FFF5;
+      --primary-color: rgba(77, 218, 110, 0.62);
+      --secondary-color: #14401D;
+      --btn-bg: rgba(77, 218, 110, 0.15);
+    }
+
+    .long {
+      --bg-color: #F2F9FF;
+      --primary-color: rgba(76, 172, 255, 0.62);
+      --secondary-color: #153047;
+      --btn-bg: rgba(76, 172, 255, 0.15);
+    }
+}

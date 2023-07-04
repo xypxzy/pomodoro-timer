@@ -2,11 +2,11 @@ import cn from 'classnames';
 import BrainIcons from '../../../assets/ph_brain-fill.svg'
 import CoffeeIcons from '../../../assets/ph_coffee.svg'
 import cls from './Chips.module.scss'
+import {chipStatusType} from "../../../features/chipStatus/chipStatusSlice.ts";
 
-type stateType = 'focus' | 'short' | 'long';
 interface IChipsProps {
     className?: string,
-    type: stateType
+    type: chipStatusType
 }
 
 function Chips(props: IChipsProps) {
