@@ -2,24 +2,30 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface TimerState {
-    minute: number;
-    second: number;
+    minutes: number;
+    seconds: number;
 }
 
 const initialState: TimerState = {
-    minute: 25,
-    second: 0
+    minutes: 25,
+    seconds: 0
 }
 
 export const TimerSlice = createSlice({
-    name: 'chipStatus',
+    name: 'timer',
     initialState,
     reducers: {
-        setChipStatus: (state, action: PayloadAction<TimerState>) => {
-            state.type = action.payload;
-        }
+        setMinute: (state, action: PayloadAction<number>) => {
+            state.minutes = action.payload;
+        },
+        decrementSeconds(state) {
+            state.seconds -= 1;
+        },
+        resetSeconds(state, action: PayloadAction<number>) {
+            state.seconds = action.payload;
+        },
     },
 })
 
-export const {setChipStatus} = TimerSlice.actions
-export const chipStatusReducers = TimerSlice.reducer
+export const { setMinute, decrementSeconds, resetSeconds} = TimerSlice.actions
+export const timerReducers = TimerSlice.reducer
