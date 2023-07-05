@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type {PayloadAction} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
+import {LOCAL_STORAGE_MODE_STATUS_KEY} from "@/shared/const/localStorage.ts";
+import {modeStatusType} from "../types/modeStatus.ts";
 
-export type modeStatusType = 'focus' | 'short' | 'long';
 interface modeStatusState {
     type: modeStatusType;
 }
 
 const initialState: modeStatusState = {
-    type: 'focus'
+    type: localStorage.getItem(LOCAL_STORAGE_MODE_STATUS_KEY) as modeStatusType || 'focus',
 }
 
 export const ModeStatusSlice = createSlice({

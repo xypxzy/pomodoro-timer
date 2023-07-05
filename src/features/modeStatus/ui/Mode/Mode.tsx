@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import BrainIcons from '@/shared/assets/ph_brain-fill.svg'
 import CoffeeIcons from '@/shared/assets/ph_coffee.svg'
-import {modeStatusType} from "../../model/slices/modeStatusSlice.ts";
 import cls from './Mode.module.scss'
+import {modeStatusType} from "@/features/modeStatus/model/types/modeStatus.ts";
 
 interface ModeProps {
     className?: string,
