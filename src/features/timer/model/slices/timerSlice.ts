@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import {Time} from "@/shared/const/modeStatus.ts";
 
-interface TimerState {
-    minutes: number;
-    seconds: number;
+interface TimerState extends Time{
     isPlay: boolean;
 }
 
@@ -17,8 +16,9 @@ export const TimerSlice = createSlice({
     name: 'timer',
     initialState,
     reducers: {
-        setMinute: (state, action: PayloadAction<number>) => {
-            state.minutes = action.payload;
+        setTime: (state, action: PayloadAction<Time>) => {
+            state.seconds = action.payload.seconds;
+            state.minutes = action.payload.minutes;
         },
         setPause: (state) => {
             state.isPlay = false;
@@ -49,5 +49,5 @@ export const TimerSlice = createSlice({
     },
 })
 
-export const { setMinute, decrementSeconds, decrementMinutes, setPause, setResume, resetSeconds } = TimerSlice.actions
+export const {  decrementSeconds, setPause, setResume, resetSeconds, setTime } = TimerSlice.actions
 export const timerReducers = TimerSlice.reducer

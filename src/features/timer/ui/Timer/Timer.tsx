@@ -8,14 +8,14 @@ import cls from './Timer.module.scss'
 import {Digits} from "@/shared/ui/Digits/Digits.tsx";
 import {Controls} from "@/features/controlPanel/ui/Controls.tsx";
 import {Mode} from "@/features/modeStatus";
-import {useModeStatus} from "@/shared/lib/hooks/useModeStatus/useModeStatus.ts";
+import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 
 interface TimerProps {
     className?: string;
 }
 
 export const Timer = memo(({className}: TimerProps) => {
-    const {modeStatus} = useModeStatus();
+    const {mode} = useMode();
 
     const minutes = useSelector(getMinutes);
     const seconds = useSelector(getSeconds);
@@ -38,7 +38,7 @@ export const Timer = memo(({className}: TimerProps) => {
         <div
             className={cn(cls.timer, className)}
         >
-            <Mode type={modeStatus} />
+            <Mode type={mode.status} />
             <div className={cls.digits}>
                 <Digits digits={minutes} isPlay={isPlay}/>
                 <Digits digits={seconds} isPlay={isPlay}/>

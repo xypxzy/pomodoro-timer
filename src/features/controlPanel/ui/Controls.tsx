@@ -1,14 +1,16 @@
-import {memo} from 'react';
+import {memo, useEffect} from 'react';
 import cn from "classnames";
 import cls from './Controls.module.scss'
-import {setPause, setResume} from "@/widgets/timer/model/slices/timerSlice.ts";
+import {setPause, setResume, setTime} from "../../timer/model/slices/timerSlice.ts";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
 import {Button} from "@/shared/ui/Button/Button.tsx";
 import PauseIcon from "@/shared/assets/ph_pause-fill.svg";
 import PlayIcon from "@/shared/assets/ph_play-fill.svg";
-import SettingIcon from "@/shared/assets/ph_dots-three-outline-fill.svg";
+import ThreeDotsIcon from "@/shared/assets/ph_dots-three-outline-fill.svg";
 import NextIcon from "@/shared/assets/ph_fast-forward-fill.svg";
-import {useModeStatus} from "@/shared/lib/hooks/useModeStatus/useModeStatus.ts";
+import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
+import {Modal} from "@/shared/ui/Modal/Modal.tsx";
+import {Menu} from "@/features/Menu/ui/Menu/Menu.tsx";
 
 interface ControlsProps {
     className?: string;
@@ -16,23 +18,28 @@ interface ControlsProps {
 }
 
 export const Controls = memo(({className, isPlay}: ControlsProps) => {
-    const {toggleModeStatus} = useModeStatus();
+    const {toggleMode, mode} = useMode();
     const dispatch = useAppDispatch();
+
     const handlePause = () => {
         dispatch(setPause());
     };
     const handleResume = () => {
         dispatch(setResume());
     };
+    useEffect(() => {
+        dispatch(setTime(mode.time))
+    }, [mode.time])
+
     const handleChangeStatus = () => {
-        toggleModeStatus();
+        toggleMode();
     }
 
     return (
         <div className={cn(cls.Controls, className)}>
-            <Button size={'medium'}>
-                <SettingIcon />
-            </Button>
+            <Modal btnText={<ThreeDotsIcon/>} >
+                <Menu />
+            </Modal>
             {isPlay ? (
                 <Button onClick={handlePause}>
                     <PauseIcon />
