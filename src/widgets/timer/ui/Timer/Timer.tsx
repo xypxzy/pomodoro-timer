@@ -2,13 +2,13 @@ import {memo, useEffect} from 'react';
 import cn from "classnames";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
-import {Digits} from "@/shared/ui/Digits/Digits.tsx";
 import {getIsPlay, getMinutes, getSeconds} from "../../model/selectors/timerSelectors.ts";
-import {decrementSeconds, setPause, setResume} from "../../model/slices/timerSlice.ts";
+import {decrementSeconds} from "../../model/slices/timerSlice.ts";
 import cls from './Timer.module.scss'
-import {Button} from "@/shared/ui/Button/Button.tsx";
-import PlayIcon from '@/shared/assets/ph_play-fill.svg'
-import PauseIcon from '@/shared/assets/ph_pause-fill.svg'
+import {Digits} from "@/shared/ui/Digits/Digits.tsx";
+import {Controls} from "@/features/controlPanel/ui/Controls.tsx";
+import {Mode} from "@/features/modeStatus";
+import {RootState} from "@/app/providers/StoreProvider";
 
 interface TimerProps {
     className?: string;
@@ -18,6 +18,8 @@ export const Timer = memo(({className}: TimerProps) => {
     const minutes = useSelector(getMinutes);
     const seconds = useSelector(getSeconds);
     const isPlay = useSelector(getIsPlay);
+    const status = useSelector((state: RootState) => state.modeStatus.type);
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -31,31 +33,17 @@ export const Timer = memo(({className}: TimerProps) => {
         return () => clearInterval(interval)
     }, [dispatch, isPlay, seconds, minutes])
 
-    const handlePause = () => {
-        dispatch(setPause());
-    };
-
-    const handleResume = () => {
-        dispatch(setResume());
-    };
-
     return (
-        <>
-            <div
-                className={cn(cls.timer, className)}
-            >
+        <div
+            className={cn(cls.timer, className)}
+        >
+            <Mode type={status} />
+            <div className={cls.digits}>
                 <Digits digits={minutes} isPlay={isPlay}/>
                 <Digits digits={seconds} isPlay={isPlay}/>
             </div>
-            {isPlay ? (
-                <Button onClick={handlePause}>
-                    <PauseIcon />
-                </Button>
-            ) : (
-                <Button onClick={handleResume}>
-                    <PlayIcon />
-                </Button>
-            )}
-        </>
+            <Controls isPlay={isPlay}/>
+        </div>
+
     );
 });
