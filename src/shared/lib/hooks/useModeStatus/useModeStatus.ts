@@ -1,41 +1,38 @@
-import {LOCAL_STORAGE_MODE_STATUS_KEY} from "@/shared/const/localStorage.ts";
-import {modeStatusType} from "@/features/modeStatus/model/types/modeStatus.ts";
-import {useSelector} from "react-redux";
-import {getModeStatus, setModeStatus} from "@/features/modeStatus";
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
+import {useContext} from "react";
+import {LOCAL_STORAGE_MODE_STATUS_KEY} from "../../../const/localStorage.ts";
+import {ModeStatusContext} from "../../../lib/context/ModeStatusContext.ts";
+import {ModeStatus} from "../../../const/modeStatus.ts";
 
-
-interface UseThemeProps {
-    toggleStatus: () => void,
-    status: modeStatusType
+interface UseModeStatusProps {
+    toggleModeStatus: () => void,
+    modeStatus: ModeStatus
 }
 
-export function useModeStatus(): UseThemeProps {
-    const status = useSelector(getModeStatus)
-    const dispatch = useAppDispatch()
+export function useModeStatus(): UseModeStatusProps {
+    const {modeStatus, setModeStatus} = useContext(ModeStatusContext);
 
-    const toggleStatus = () => {
-        let newStatus: modeStatusType;
+    const toggleModeStatus = () => {
+        let newModeStatus: ModeStatus;
 
-        switch (status) {
-            case 'focus' :
-                newStatus = 'short'
+        switch (modeStatus) {
+            case ModeStatus.FOCUS:
+                newModeStatus = ModeStatus.SHORT
                 break;
-            case 'short' :
-                newStatus = 'long'
+            case ModeStatus.SHORT:
+                newModeStatus = ModeStatus.LONG
                 break;
-            case 'long' :
-                newStatus = 'focus'
+            case ModeStatus.LONG:
+                newModeStatus = ModeStatus.FOCUS
                 break;
             default:
-                newStatus = 'focus'
+                newModeStatus = ModeStatus.FOCUS
         }
-        dispatch(setModeStatus(newStatus));
-        localStorage.setItem(LOCAL_STORAGE_MODE_STATUS_KEY, newStatus)
+        setModeStatus?.(newModeStatus);
+        localStorage.setItem(LOCAL_STORAGE_MODE_STATUS_KEY, newModeStatus)
     }
 
     return {
-        status: status || 'focus',
-        toggleStatus
+        modeStatus: modeStatus || ModeStatus.FOCUS,
+        toggleModeStatus,
     }
 }

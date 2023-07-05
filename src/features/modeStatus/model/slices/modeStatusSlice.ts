@@ -1,7 +1,7 @@
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {createSlice} from '@reduxjs/toolkit'
 import {LOCAL_STORAGE_MODE_STATUS_KEY} from "@/shared/const/localStorage.ts";
-import {modeStatusType} from "../types/modeStatus.ts";
+import {modeStatusType} from "../../../../shared/const/modeStatus.ts";
 
 interface modeStatusState {
     type: modeStatusType;

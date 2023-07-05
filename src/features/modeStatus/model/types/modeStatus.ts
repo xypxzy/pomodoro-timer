@@ -1,1 +1,0 @@
-export type modeStatusType = 'focus' | 'short' | 'long';

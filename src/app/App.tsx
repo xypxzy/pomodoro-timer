@@ -1,20 +1,19 @@
 import cn from "classnames";
 import './styles/index.scss';
+import {Timer} from "@/widgets/timer/ui/Timer/Timer.tsx";
 import {ThemeSwitcher} from "@/features/ThemeSwitcher";
 import {useTheme} from "@/shared/lib/hooks/useTheme/useTheme.tsx";
-import {Timer} from "@/widgets/timer/ui/Timer/Timer.tsx";
-import {useSelector} from "react-redux";
-import {RootState} from "@/app/providers/StoreProvider";
+import {useModeStatus} from "@/shared/lib/hooks/useModeStatus/useModeStatus.ts";
 
 
 function App() {
     const {theme} = useTheme();
-    const status = useSelector((state: RootState) => state.modeStatus.type);
+    const {modeStatus} = useModeStatus();
 
     return (
         <div className={cn(`${theme.toLowerCase()}`)}>
             <div
-                className={cn(`${status}`, 'app')}
+                className={cn(`${modeStatus}`, 'app')}
             >
                 <Timer />
                 <ThemeSwitcher />

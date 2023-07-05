@@ -16,7 +16,7 @@ interface ControlsProps {
 }
 
 export const Controls = memo(({className, isPlay}: ControlsProps) => {
-    const {toggleStatus} = useModeStatus();
+    const {toggleModeStatus} = useModeStatus();
     const dispatch = useAppDispatch();
     const handlePause = () => {
         dispatch(setPause());
@@ -25,7 +25,7 @@ export const Controls = memo(({className, isPlay}: ControlsProps) => {
         dispatch(setResume());
     };
     const handleChangeStatus = () => {
-        toggleStatus();
+        toggleModeStatus();
     }
 
     return (
