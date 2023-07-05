@@ -12,7 +12,6 @@ interface ModeProps {
 export function Mode(props: ModeProps) {
     const {className, type} = props;
 
-
     return (
         <div
             className={cn(cls.chips, className)}

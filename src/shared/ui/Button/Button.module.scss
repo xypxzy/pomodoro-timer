@@ -1,0 +1,32 @@
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 32px;
+    background: var(--btn-bg);
+
+    svg {
+        fill: var(--secondary-color);
+    }
+}
+
+.big {
+    width: 126px;
+    height: 96px;
+}
+
+.medium {
+    width: 80px;
+    height: 80px;
+}
+
+.small {
+    width: 34px;
+    height: 34px;
+
+    svg {
+        width: 12px;
+        height: 14px;
+    }
+}

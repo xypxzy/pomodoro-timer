@@ -6,6 +6,9 @@ import {Digits} from "@/shared/ui/Digits/Digits.tsx";
 import {getIsPlay, getMinutes, getSeconds} from "../../model/selectors/timerSelectors.ts";
 import {decrementSeconds, setPause, setResume} from "../../model/slices/timerSlice.ts";
 import cls from './Timer.module.scss'
+import {Button} from "@/shared/ui/Button/Button.tsx";
+import PlayIcon from '@/shared/assets/ph_play-fill.svg'
+import PauseIcon from '@/shared/assets/ph_pause-fill.svg'
 
 interface TimerProps {
     className?: string;
@@ -45,9 +48,13 @@ export const Timer = memo(({className}: TimerProps) => {
                 <Digits digits={seconds} isPlay={isPlay}/>
             </div>
             {isPlay ? (
-                <button onClick={handlePause}>Pause Timer</button>
+                <Button onClick={handlePause}>
+                    <PauseIcon />
+                </Button>
             ) : (
-                <button onClick={handleResume}>Resume Timer</button>
+                <Button onClick={handleResume}>
+                    <PlayIcon />
+                </Button>
             )}
         </>
     );
