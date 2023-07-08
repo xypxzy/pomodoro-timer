@@ -1,80 +1,58 @@
-import {Fragment, memo, ReactNode, useState} from 'react';
-import {Dialog, Transition} from "@headlessui/react";
+import {memo, ReactNode, useEffect, useRef} from 'react';
+import cn from "classnames";
 import cls from './Modal.module.scss'
-import {Button} from "@/shared/ui/Button/Button.tsx";
-
 interface ModalProps {
     className?: string;
-    title?: string;
-    children?: ReactNode;
-    btnText?: ReactNode;
+    isOpen: boolean;
+    onClose: () => void;
+    children: ReactNode;
+    maxWidth?: 'm' | 'l';
 }
+
 export const Modal = memo((props: ModalProps) => {
-    const {className, title, children, btnText} = props;
-    let [isOpen, setIsOpen] = useState(true)
+    const {className, children, onClose, isOpen, maxWidth = 'm'} = props;
+    const modalRef = useRef<HTMLDivElement>(null);
 
-    function closeModal() {
-        setIsOpen(false)
+    const handleClickOutside = (event: MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+            onClose();
+        }
+    };
+    const handleEscapeKey = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            onClose();
+        }
     }
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleEscapeKey);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscapeKey);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscapeKey);
+        };
+    }, [isOpen, onClose]);
 
-    function openModal() {
-        setIsOpen(true)
-    }
+
+    if (!isOpen) return null;
 
     return (
-        <div className={className}>
-            <Button
-                size={'medium'}
-                onClick={openModal}
-            >
-                {btnText}
-            </Button>
-
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className={cls.transition}/>
-                    </Transition.Child>
-
-                    <div className={cls.Modal}>
-                        <div className={cls.menu}>
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel
-                                    className={cls.content}
-                                >
-                                    {
-                                        title && (
-                                            <Dialog.Title
-                                                as="h3"
-                                                className={cls.title}
-                                            >
-                                                {title}
-                                            </Dialog.Title>
-                                        )
-                                    }
-                                    {children}
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-            </Transition>
+        <div className={
+            cn(cls.modal ,className)
+        }>
+            <div ref={modalRef} className={
+                cn(cls.modalContent, {
+                    [cls.m]: maxWidth == 'm',
+                    [cls.l]: maxWidth == 'l',
+                }
+                )
+            }>
+                {children}
+            </div>
         </div>
     )
 });

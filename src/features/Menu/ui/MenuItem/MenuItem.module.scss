@@ -1,9 +1,26 @@
 .MenuItem {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    background: var(--secondary-color);
+    padding: 6px 0;
+    font: var(--font-regular);
+    letter-spacing: 0.15px;
+
+    .items {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        cursor: pointer;
+
+    }
+
+    .shortcuts {
+        display: flex;
+    }
 
     svg {
+        width: 24px;
+        height: 24px;
         fill: var(--primary-color);
     }
 }

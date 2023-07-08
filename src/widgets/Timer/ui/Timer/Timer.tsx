@@ -6,9 +6,9 @@ import {getIsPlay, getMinutes, getSeconds} from "../../model/selectors/timerSele
 import {decrementSeconds} from "../../model/slices/timerSlice.ts";
 import cls from './Timer.module.scss'
 import {Digits} from "@/shared/ui/Digits/Digits.tsx";
-import {Controls} from "@/features/controlPanel/ui/Controls.tsx";
-import {Mode} from "@/features/modeStatus";
 import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
+import {Mode} from "@/features/modeStatus";
+import {Controls} from "@/widgets/ControlPanel";
 
 interface TimerProps {
     className?: string;

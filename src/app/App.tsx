@@ -1,5 +1,5 @@
 import cn from "classnames";
-import {Timer} from "@/features/timer/ui/Timer/Timer.tsx";
+import {Timer} from "@/widgets/Timer/ui/Timer/Timer.tsx";
 import {useTheme} from "@/shared/lib/hooks/useTheme/useTheme.tsx";
 import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 

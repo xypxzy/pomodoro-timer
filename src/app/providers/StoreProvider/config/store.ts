@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { timerReducers } from "@/features/timer/model/slices/timerSlice.ts";
+import { timerReducers } from "@/widgets/Timer/model/slices/timerSlice.ts";
 import { modeStatusReducers } from "@/features/modeStatus/model/slices/modeStatusSlice.ts";
 
 export const store = configureStore({
