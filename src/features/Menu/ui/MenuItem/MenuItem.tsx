@@ -16,8 +16,8 @@ export const MenuItem = memo(({className, children, shortcut, onClick}: MenuItem
             <span className={cls.items}>{children}</span>
             <span className={cls.shortcuts}>
                 {
-                    shortcut?.map((str) => (
-                        <Shortcuts>{str}</Shortcuts>
+                    shortcut?.map((str, index) => (
+                        <Shortcuts key={index}>{str}</Shortcuts>
                     ))
                 }
             </span>

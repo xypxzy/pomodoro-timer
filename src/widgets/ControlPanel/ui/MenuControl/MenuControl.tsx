@@ -5,20 +5,20 @@ import ThreeDotsIcon from "@/shared/assets/ph_dots-three-outline-fill.svg";
 import {Modal} from "@/shared/ui/Modal/Modal.tsx";
 
 export const MenuControl = () => {
-    const [modalOpen, setModalOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setModalOpen(true);
+    const handleOpenMenu = () => {
+        setMenuOpen(true);
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
+    const handleCloseMenu = () => {
+        setMenuOpen(false);
     };
 
     return (
         <div>
-            <Button size={'medium'} onClick={handleOpenModal}><ThreeDotsIcon /></Button>
-            <Modal isOpen={modalOpen} onClose={handleCloseModal}>
+            <Button size={'medium'} onClick={handleOpenMenu}><ThreeDotsIcon /></Button>
+            <Modal isOpen={menuOpen} onClose={handleCloseMenu}>
                 <Menu />
             </Modal>
         </div>
