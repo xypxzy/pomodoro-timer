@@ -1,7 +1,6 @@
 import {memo, useState} from 'react';
 import cn from "classnames";
 import cls from './SwitchButton.module.scss'
-import {LOCAL_STORAGE_THEME_KEY} from "@/shared/const/localStorage.ts";
 
 export interface SwitchButtonProps {
     className?: string;
@@ -11,7 +10,7 @@ export interface SwitchButtonProps {
 }
 
 export const SwitchButton = memo((props: SwitchButtonProps) => {
-    const {className, defaultOn = false, onToggle, theme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY)} = props;
+    const {className, defaultOn = false, onToggle} = props;
     const [isOn, setIsOn] = useState(defaultOn);
 
     const handleToggle = () => {
