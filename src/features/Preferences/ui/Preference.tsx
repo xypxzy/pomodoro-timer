@@ -2,7 +2,7 @@ import SettingIcon from "@/shared/assets/ph_gear-six-fill.svg";
 import {MenuItem} from "@/features/Menu/ui/MenuItem/MenuItem.tsx";
 import {lazy, Suspense, useState} from "react";
 
-const PreferenceModal = lazy(() => import('./PreferenceModal.tsx'));
+const PreferenceModal = lazy(() => import('@/features/Preferences/ui/PreferenceModal/PreferenceModal.tsx'));
 export function Preference() {
     const [settingOpen, setSettingOpen] = useState(false);   //Реализация сеттинга
 

@@ -1,0 +1,26 @@
+.SwitchButton {
+    height: 20px;
+    width: 40px;
+    flex-shrink: 0;
+    cursor: pointer;
+    border-radius: 9999px;
+    border-width: 2px;
+    border-color: transparent;
+    transition-property: color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+
+    &:focus {
+        outline: none;
+    }
+
+    .round {
+        transition: all 0.2s ease-in-out;
+
+        height: 16px;
+        width: 16px;
+        border-radius: 9999px;
+        background-color: #fff;
+    }
+}
+

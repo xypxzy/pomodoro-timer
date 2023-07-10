@@ -19,6 +19,8 @@ const initialValue: ModeProps = {
 export function useMode(): UseModeStatusProps {
     const {mode, setMode} = useContext(ModeContext);
 
+
+
     const toggleMode = () => {
         let newModeStatus: ModeStatus;
         let newTime: Time;

@@ -9,9 +9,14 @@
     .items {
         display: flex;
         align-items: center;
+        width: 100%;
+        padding: 6px 0;
         gap: 7px;
         cursor: pointer;
+    }
 
+    .justify {
+        justify-content: space-between;
     }
 
     .shortcuts {

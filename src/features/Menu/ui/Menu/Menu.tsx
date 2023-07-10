@@ -1,9 +1,9 @@
 import {memo} from 'react';
 import cn from "classnames";
 import cls from './Menu.module.scss'
-import {Preference} from "@/features/Menu/ui/Preference/Preference.tsx";
 import {Statistics} from "@/features/Menu/ui/Statistics/Statistics.tsx";
 import {ShortcutsMenu} from "@/features/Menu/ui/Shortcuts/ShortcutsMenu.tsx";
+import {Preference} from "@/features/Preferences/ui/Preference.tsx";
 
 interface MenuProps {
     className?: string;

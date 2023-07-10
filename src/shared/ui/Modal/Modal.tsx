@@ -1,6 +1,7 @@
 import {memo, ReactNode, useEffect, useRef} from 'react';
 import cn from "classnames";
 import cls from './Modal.module.scss'
+
 interface ModalProps {
     className?: string;
     isOpen: boolean;
@@ -42,15 +43,17 @@ export const Modal = memo((props: ModalProps) => {
 
     return (
         <div className={
-            cn(cls.modal ,className)
+            cn(cls.modal, className)
         }>
-            <div ref={modalRef} className={
-                cn(cls.modalContent, {
-                    [cls.m]: maxWidth == 'm',
-                    [cls.l]: maxWidth == 'l',
-                }
-                )
-            }>
+            <div
+                ref={modalRef}
+                className={
+                    cn(cls.modalContent, {
+                            [cls.m]: maxWidth == 'm',
+                            [cls.l]: maxWidth == 'l',
+                        }
+                    )
+                }>
                 {children}
             </div>
         </div>

@@ -1,0 +1,12 @@
+.header {
+    font: var(--font-m);
+    font-weight: 700;
+    padding: 10px 0;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
