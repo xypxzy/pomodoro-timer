@@ -3,10 +3,11 @@ import {Button} from "@/shared/ui/Button/Button.tsx";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
 import PauseIcon from "@/shared/assets/ph_pause-fill.svg";
 import PlayIcon from "@/shared/assets/ph_play-fill.svg";
-interface TimeProps {
-    isPlay?: boolean
-}
-export const TimeControl = ({isPlay}: TimeProps) => {
+import {useSelector} from "react-redux";
+import {getIsPlay} from "@/widgets/Timer/model/selectors/timerSelectors.ts";
+
+export const TimeControl = () => {
+    const isPlay = useSelector(getIsPlay);
     const dispatch = useAppDispatch();
     const handlePause = () => {
         dispatch(setPause());

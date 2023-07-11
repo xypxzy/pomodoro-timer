@@ -4,12 +4,14 @@ import {Time} from "@/shared/const/modeStatus.ts";
 
 interface TimerState extends Time{
     isPlay: boolean;
+    sessionCount: number;
 }
 
 const initialState: TimerState = {
     minutes: 25,
     seconds: 0,
-    isPlay: false
+    isPlay: false,
+    sessionCount: 4,
 }
 
 export const TimerSlice = createSlice({
@@ -25,6 +27,9 @@ export const TimerSlice = createSlice({
         },
         setResume: (state) => {
             state.isPlay = true;
+        },
+        setSessionCount: (state, action: PayloadAction<number>) => {
+            state.sessionCount = action.payload;
         },
         decrementMinutes(state ) {
             if(state.isPlay && state.minutes > 0) {
@@ -49,5 +54,5 @@ export const TimerSlice = createSlice({
     },
 })
 
-export const {  decrementSeconds, setPause, setResume, resetSeconds, setTime } = TimerSlice.actions
+export const {  decrementSeconds, setPause, setResume, setSessionCount, setTime } = TimerSlice.actions
 export const timerReducers = TimerSlice.reducer

@@ -9,6 +9,6 @@ export interface ThemeSwitcherProps {
 export const ThemeSwitcher = memo(({}: ThemeSwitcherProps) => {
     const {theme, toggleTheme} = useTheme();
     return (
-        <SwitchButton onToggle={toggleTheme} theme={theme}/>
+        <SwitchButton onToggle={toggleTheme} theme={theme} defaultOn={theme == 'DARK'}/>
     )
 })

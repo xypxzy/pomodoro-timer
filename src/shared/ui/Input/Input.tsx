@@ -5,12 +5,13 @@ import {Time} from "@/shared/const/modeStatus.ts";
 
 export interface InputProps extends HTMLAttributes<HTMLInputElement>{
     className?: string;
-    value: number;
-    setCurrentTime: (time: Time) => void;
+    value?: number;
+    setCurrentTime?: (time: Time) => void;
+    setCount?: (count: number) => void;
 }
 
 export const Input = memo((props: InputProps) => {
-    const {className, value, setCurrentTime, ...otherProps} = props;
+    const {className, value, setCurrentTime, setCount, ...otherProps} = props;
 
     const [number, setNumber] = useState<number | undefined>(value);
 
@@ -20,8 +21,11 @@ export const Input = memo((props: InputProps) => {
     };
 
     useEffect(() => {
-        if(number) {
+        if(number && setCurrentTime) {
             setCurrentTime({ minutes: number , seconds: 0})
+        }
+        if(number && setCount) {
+            setCount(number)
         }
     }, [number]);
 

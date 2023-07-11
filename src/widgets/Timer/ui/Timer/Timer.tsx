@@ -1,4 +1,4 @@
-import {memo, useEffect} from 'react';
+import {memo, useEffect, useState} from 'react';
 import cn from "classnames";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
@@ -9,6 +9,8 @@ import {Digits} from "@/shared/ui/Digits/Digits.tsx";
 import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 import {Mode} from "@/features/modeStatus";
 import {Controls} from "@/widgets/ControlPanel";
+import useSound from "use-sound";
+import timerSound from '@/shared/assets/mixkit-score-casino-counter-1998.wav';
 
 interface TimerProps {
     className?: string;
@@ -16,12 +18,15 @@ interface TimerProps {
 
 export const Timer = memo(({className}: TimerProps) => {
     const {mode} = useMode();
+    const [play] = useSound(timerSound);
 
     const minutes = useSelector(getMinutes);
     const seconds = useSelector(getSeconds);
     const isPlay = useSelector(getIsPlay);
 
     const dispatch = useAppDispatch();
+
+    const finish: boolean = (seconds === 0 && minutes === 0);
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;
@@ -30,6 +35,9 @@ export const Timer = memo(({className}: TimerProps) => {
             interval = setInterval(() => {
                 dispatch(decrementSeconds())
             }, 1000)
+        }
+        if(finish) {
+            play();
         }
         return () => clearInterval(interval)
     }, [dispatch, isPlay, seconds, minutes])
@@ -43,7 +51,8 @@ export const Timer = memo(({className}: TimerProps) => {
                 <Digits digits={minutes} isPlay={isPlay}/>
                 <Digits digits={seconds} isPlay={isPlay}/>
             </div>
-            <Controls isPlay={isPlay}/>
+            <Controls/>
+
         </div>
 
     );

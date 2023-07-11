@@ -7,14 +7,13 @@ import cls from './Controls.module.scss'
 
 interface ControlsProps {
     className?: string;
-    isPlay?: boolean;
 }
 
-export const Controls = memo(({className, isPlay}: ControlsProps) => {
+export const Controls = memo(({className}: ControlsProps) => {
     return (
         <div className={cn(cls.Controls, className)}>
             <MenuControl />
-            <TimeControl isPlay={isPlay} />
+            <TimeControl />
             <NextModeControl />
         </div>
     );

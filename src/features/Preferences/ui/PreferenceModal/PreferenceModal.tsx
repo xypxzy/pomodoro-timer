@@ -6,11 +6,12 @@ import SwitchButton from "@/shared/ui/SwitchButton/SwitchButton.tsx";
 import FocusLength from "@/features/Preferences/ui/FocusLength/FocusLength.tsx";
 import LongBreakLength from "@/features/Preferences/ui/LongBreakLength/LongBreakLength.tsx";
 import ShortBreakLength from "@/features/Preferences/ui/ShortBreakLength/ShortBreakLength.tsx";
+import PomoUntilLongBreak from "@/features/Preferences/ui/PomoUntilLongBreak/PomoUntilLongBreak.tsx";
 
 const menuItems = [
     { label: "Dark mode", component: <ThemeSwitcher /> },
     { label: "Focus length", component: <FocusLength /> },
-    // { label: "Pomodoros until long break", component: <Input /> },
+    { label: "Pomodoros until long break", component: <PomoUntilLongBreak /> },
     { label: "Short break length", component: <ShortBreakLength /> },
     { label: "Long break length", component: <LongBreakLength /> },
     { label: "Auto resume timer", component: <SwitchButton /> },

@@ -4,6 +4,7 @@ import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.t
 import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 import {Button} from "@/shared/ui/Button/Button.tsx";
 import NextIcon from "@/shared/assets/ph_fast-forward-fill.svg";
+import {setModeStatus} from "@/features/modeStatus";
 
 export const NextModeControl = () => {
     const {toggleMode, mode} = useMode();
@@ -11,6 +12,7 @@ export const NextModeControl = () => {
 
     useEffect(() => {
         dispatch(setTime(mode.time))
+        dispatch(setModeStatus(mode.status)) // Можно выпилить в принципе
     }, [mode.time])
 
     const handleChangeStatus = () => {

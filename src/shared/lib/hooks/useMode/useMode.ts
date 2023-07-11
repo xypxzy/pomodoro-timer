@@ -1,13 +1,13 @@
 import {useContext} from "react";
 import {LOCAL_STORAGE_MODE_STATUS_KEY, LOCAL_STORAGE_MODE_TIME_KEY} from "../../../const/localStorage.ts";
-import {ModeStatus, ModeProps, Time} from "../../../const/modeStatus.ts";
+import {ModeProps, ModeStatus, Time} from "../../../const/modeStatus.ts";
 import {ModeContext} from "@/shared/lib/context/ModeContext.ts";
 import {getFocusTime, getLongTime, getShortTime} from "@/entities";
 import {useSelector} from "react-redux";
 
 interface UseModeStatusProps {
     mode: ModeProps,
-    toggleMode: () => void
+    toggleMode: () => void,
 }
 
 const initialValue: ModeProps = {
@@ -25,6 +25,7 @@ export function useMode(): UseModeStatusProps {
     const short = useSelector(getShortTime);
     const long = useSelector(getLongTime);
 
+    //Тут идет переход при клике пользователя
     const toggleMode = () => {
         let newModeStatus: ModeStatus;
         let newTime: Time;
@@ -58,12 +59,15 @@ export function useMode(): UseModeStatusProps {
                     seconds: focus.seconds
                 }
         }
-        setMode?.({
-            status: newModeStatus,
-            time: newTime,
-        });
-        localStorage.setItem(LOCAL_STORAGE_MODE_STATUS_KEY, newModeStatus)
-        localStorage.setItem(LOCAL_STORAGE_MODE_TIME_KEY, JSON.stringify(newTime))
+
+        if (setMode) {
+            setMode({
+                status: newModeStatus,
+                time: newTime
+            });
+            localStorage.setItem(LOCAL_STORAGE_MODE_STATUS_KEY, newModeStatus);
+            localStorage.setItem(LOCAL_STORAGE_MODE_TIME_KEY, JSON.stringify(newTime));
+        }
     }
 
     return {

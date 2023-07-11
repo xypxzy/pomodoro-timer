@@ -2,12 +2,12 @@ import {Input} from "@/shared/ui/Input/Input.tsx";
 import {useSelector} from "react-redux";
 import {getLongTime, setLong} from "@/entities";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch.ts";
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {Time} from "@/shared/const/modeStatus.ts";
 import {setTime} from "@/widgets/Timer/model/slices/timerSlice.ts";
 import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 
-function LongBreakLength() {
+const LongBreakLength = memo(() => {
     const {mode} = useMode();
     const longTime = useSelector(getLongTime);
     const dispatch = useAppDispatch();
@@ -25,6 +25,6 @@ function LongBreakLength() {
     return (
         <Input value={currentTime.minutes} setCurrentTime={setCurrentTime} />
     );
-}
+});
 
 export default LongBreakLength;
