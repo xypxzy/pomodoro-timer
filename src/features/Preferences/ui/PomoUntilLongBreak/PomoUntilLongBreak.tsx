@@ -13,9 +13,7 @@ function PomoUntilLongBreak() {
 
     useEffect(() => {
         dispatch(setSessionCount(session))
-        console.log(sessionCount)
     }, [dispatch, session])
-
 
     return (
         <Input value={sessionCount} setCount={setSession} />

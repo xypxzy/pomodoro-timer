@@ -7,6 +7,8 @@ import FocusLength from "@/features/Preferences/ui/FocusLength/FocusLength.tsx";
 import LongBreakLength from "@/features/Preferences/ui/LongBreakLength/LongBreakLength.tsx";
 import ShortBreakLength from "@/features/Preferences/ui/ShortBreakLength/ShortBreakLength.tsx";
 import PomoUntilLongBreak from "@/features/Preferences/ui/PomoUntilLongBreak/PomoUntilLongBreak.tsx";
+import {SoundSwitcher} from "@/features/Preferences/ui/SoundSwitch/SoundSwitcher.tsx";
+import {memo} from "react";
 
 const menuItems = [
     { label: "Dark mode", component: <ThemeSwitcher /> },
@@ -15,7 +17,7 @@ const menuItems = [
     { label: "Short break length", component: <ShortBreakLength /> },
     { label: "Long break length", component: <LongBreakLength /> },
     { label: "Auto resume timer", component: <SwitchButton /> },
-    { label: "Sound", component: <SwitchButton /> },
+    { label: "Sound", component: <SoundSwitcher /> },
     { label: "Notifications", component: <SwitchButton /> },
 ];
 
@@ -24,7 +26,7 @@ interface PreferenceModalProps {
     onCloseModal: () => void;
 }
 
-const PreferenceModal = (props: PreferenceModalProps) => {
+const PreferenceModal = memo((props: PreferenceModalProps) => {
     const {isOpen, onCloseModal} = props;
     return (
         <Modal maxWidth={'l'} isOpen={isOpen} onClose={onCloseModal}>
@@ -41,7 +43,7 @@ const PreferenceModal = (props: PreferenceModalProps) => {
             </>
         </Modal>
     );
-}
+});
 
 export default PreferenceModal;
 

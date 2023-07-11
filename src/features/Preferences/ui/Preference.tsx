@@ -3,6 +3,7 @@ import {MenuItem} from "@/features/Menu/ui/MenuItem/MenuItem.tsx";
 import {lazy, Suspense, useState} from "react";
 
 const PreferenceModal = lazy(() => import('@/features/Preferences/ui/PreferenceModal/PreferenceModal.tsx'));
+
 export function Preference() {
     const [settingOpen, setSettingOpen] = useState(false);   //Реализация сеттинга
 
@@ -18,9 +19,14 @@ export function Preference() {
         <MenuItem shortcut={['Ctrl', 'P']} onClick={handleOpenModal}>
             <SettingIcon/>
             Preference
-            <Suspense fallback={<h1>Loading ...</h1>}>
-                <PreferenceModal isOpen={settingOpen} onCloseModal={handleCloseModal} />
-            </Suspense>
+            {
+                settingOpen && (
+                    <Suspense fallback={<h1>Loading ...</h1>}>
+                        <PreferenceModal isOpen={settingOpen} onCloseModal={handleCloseModal}/>
+                    </Suspense>
+                )
+            }
         </MenuItem>
+
     );
 }
