@@ -29,7 +29,6 @@ export function useMode(): UseModeStatusProps {
 
     const [sessionCount, setSessionCount] = useState(0);
 
-    // Тут идет переход при клике пользователя
     const toggleMode = () => {
         let newModeStatus: ModeStatus;
         let newTime: Time;
@@ -75,6 +74,13 @@ export function useMode(): UseModeStatusProps {
         }
 
         if (setMode) {
+            if (sessionCount === session - 1 && newModeStatus === ModeStatus.SHORT) {
+                newModeStatus = ModeStatus.LONG;
+                newTime = {
+                    minutes: long.minutes,
+                    seconds: long.seconds,
+                };
+            }
             setMode({
                 status: newModeStatus,
                 time: newTime,

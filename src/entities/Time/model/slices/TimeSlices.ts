@@ -10,16 +10,16 @@ interface TimeState {
 
 const initialState: TimeState = {
     focus: {
-        minutes: 0,
-        seconds: 10
+        minutes: 25,
+        seconds: 0
     },
     short: {
-        minutes: 0,
-        seconds: 10
+        minutes: 5,
+        seconds: 0
     },
     long: {
-        minutes: 0,
-        seconds: 10
+        minutes: 10,
+        seconds: 0
     },
 }
 
