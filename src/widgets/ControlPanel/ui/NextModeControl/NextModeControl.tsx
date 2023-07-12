@@ -7,8 +7,10 @@ import NextIcon from "@/shared/assets/ph_fast-forward-fill.svg";
 import {setModeStatus} from "@/features/modeStatus";
 
 export const NextModeControl = () => {
-    const {toggleMode, mode} = useMode();
+    const {mode, toggleMode} = useMode();
     const dispatch = useAppDispatch();
+
+
 
     useEffect(() => {
         dispatch(setTime(mode.time))

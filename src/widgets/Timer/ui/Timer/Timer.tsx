@@ -6,20 +6,18 @@ import {getIsPlay, getMinutes, getSeconds, getSound} from "../../model/selectors
 import {decrementSeconds} from "../../model/slices/timerSlice.ts";
 import cls from './Timer.module.scss'
 import {Digits} from "@/shared/ui/Digits/Digits.tsx";
-import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
-import {Mode} from "@/features/modeStatus";
-import {Controls} from "@/widgets/ControlPanel";
 import timerSound from '@/shared/assets/mixkit-score-casino-counter-1998.wav';
 // @ts-ignore
 import useSound from "use-sound";
+import {useMode} from "@/shared/lib/hooks/useMode/useMode.ts";
 
 interface TimerProps {
     className?: string;
 }
 
 export const Timer = memo(({className}: TimerProps) => {
-    const {mode} = useMode();
     const [play] = useSound(timerSound);
+    const {toggleMode} = useMode()
 
     const minutes = useSelector(getMinutes);
     const seconds = useSelector(getSeconds);
@@ -38,23 +36,19 @@ export const Timer = memo(({className}: TimerProps) => {
                 dispatch(decrementSeconds())
             }, 1000)
         }
-        if(finish && sound) {
+        if(finish) {
             play();
+            toggleMode();
         }
         return () => clearInterval(interval)
-    }, [dispatch, isPlay, seconds, minutes])
+    }, [dispatch, isPlay, seconds, minutes, sound])
 
     return (
         <div
             className={cn(cls.timer, className)}
         >
-            <Mode type={mode.status} />
-            <div className={cls.digits}>
                 <Digits digits={minutes} isPlay={isPlay}/>
                 <Digits digits={seconds} isPlay={isPlay}/>
-            </div>
-            <Controls/>
-
         </div>
 
     );
